@@ -23,20 +23,23 @@ tasks:
     dir: ./ePrometna_Server
     deps:
       - task: "{{OS}}:server-setup-env"
-      - server-install-dep
+      - task: server-install-dep
+    parallel: true
     cmds:
-      - task dev
+      - cmd: "task dev"
     signal: SIGINT
 
   linux:server-setup-env:
-    task: "unix:server-setup-env"
+    cmd:
+      task: server-setup-env
     internal: true
 
   darwin:server-setup-env:
-    task: "unix:server-setup-env"
+    cmd:
+      task: server-setup-env
     internal: true
 
-  unix:server-setup-env:
+  server-setup-env:
     dir: ./ePrometna_Server
     cmd: "[ -f '.env' ] || cp env.example .env"
     internal: true
