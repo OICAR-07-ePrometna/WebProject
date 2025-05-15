@@ -4,7 +4,7 @@ tasks:
   dev:
     desc: "Starts both Server (task dev) and WebApp (npm run dev) in parallel"
     cmds:
-      - task: update-init
+      - task: clone-init
       - task: dev-deps
 
   dev-deps:
@@ -16,8 +16,9 @@ tasks:
 
   clone-init:
     cmds:
-      - cmd: "[-f 'ePrometna_Server'] || git clone https://github.com/OICAR-07-ePrometna/ePrometna_Server"
-      - cmd: "[-f 'ePrometna_WebApp'] || git clone https://github.com/OICAR-07-ePrometna/ePrometna_WebApp"
+      - cmd: "[-e 'ePrometna_Server'] || git clone https://github.com/OICAR-07-ePrometna/ePrometna_Server"
+      - cmd: "[-e 'ePrometna_WebApp'] || git clone https://github.com/OICAR-07-ePrometna/ePrometna_WebApp"
+    ignore_error: true
     internal: true
 
   server-dev:
