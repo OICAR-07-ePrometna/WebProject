@@ -4,10 +4,14 @@ tasks:
   dev:
     desc: "Starts both Server (task dev) and WebApp (npm run dev) in parallel"
     deps:
+      - update-init
       - server-dev
       - webapp-dev
       - "{{OS}}:open"
     parallel: true
+
+  update-init:
+    cmd: git submodule update --init --recursive
 
   server-dev:
     desc: "Runs 'task dev' in the ePrometna_Server directory"
