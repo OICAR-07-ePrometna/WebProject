@@ -1,6 +1,0 @@
-[submodule "ePrometna_Server"]
-	path = ePrometna_Server
-	url = https://github.com/OICAR-07-ePrometna/ePrometna_Server
-[submodule "ePrometna_WebApp"]
-	path = ePrometna_WebApp
-	url = https://github.com/OICAR-07-ePrometna/ePrometna_WebApp
