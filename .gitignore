@@ -1,2 +1,5 @@
 *.tmp*
 tmp/
+
+ePrometna_Server/
+ePrometna_WebApp/

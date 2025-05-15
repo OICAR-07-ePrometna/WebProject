@@ -14,8 +14,10 @@ tasks:
       - "{{OS}}:open"
     parallel: true
 
-  update-init:
-    cmd: git submodule update --init --recursive
+  clone-init:
+    cmds:
+      - cmd: "[-f 'ePrometna_Server'] || git clone https://github.com/OICAR-07-ePrometna/ePrometna_Server"
+      - cmd: "[-f 'ePrometna_WebApp'] || git clone https://github.com/OICAR-07-ePrometna/ePrometna_WebApp"
     internal: true
 
   server-dev:
