@@ -6,6 +6,7 @@ tasks:
     cmds:
       - task: clone-init
       - task: dev-deps
+    silent: true
 
   dev-deps:
     deps:
@@ -13,13 +14,15 @@ tasks:
       - webapp-dev
       - "{{OS}}:open"
     parallel: true
+    internal: true
 
   clone-init:
     cmds:
-      - cmd: "[-e 'ePrometna_Server'] || git clone https://github.com/OICAR-07-ePrometna/ePrometna_Server"
-      - cmd: "[-e 'ePrometna_WebApp'] || git clone https://github.com/OICAR-07-ePrometna/ePrometna_WebApp"
+      - cmd: "git clone https://github.com/OICAR-07-ePrometna/ePrometna_Server"
+      - cmd: "git clone https://github.com/OICAR-07-ePrometna/ePrometna_WebApp"
     ignore_error: true
     internal: true
+    silent: true
 
   server-dev:
     desc: "Runs 'task dev' in the ePrometna_Server directory"
