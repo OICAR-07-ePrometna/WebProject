@@ -1,0 +1,73 @@
+version: "3"
+
+tasks:
+  dev:
+    desc: "Starts both Server (task dev) and WebApp (npm run dev) in parallel"
+    deps:
+      - server-dev
+      - webapp-dev
+      - "{{OS}}:open"
+    parallel: true
+
+  server-dev:
+    desc: "Runs 'task dev' in the ePrometna_Server directory"
+    dir: ./ePrometna_Server
+    deps:
+      - task: "{{OS}}:server-setup-env"
+      - server-install-dep
+    cmds:
+      - task dev
+    signal: SIGINT
+
+  linux:server-setup-env:
+    task: "unix:server-setup-env"
+    internal: true
+
+  darwin:server-setup-env:
+    task: "unix:server-setup-env"
+    internal: true
+
+  unix:server-setup-env:
+    dir: ./ePrometna_Server
+    cmd: "[ -f '.env' ] || cp env.example .env"
+    internal: true
+
+  windows:server-setup-env:
+    cmd: "if (-not (Test-Path -Path '.env' -PathType Leaf)) { Copy-Item -Path 'env.example' -Destination '.env' }"
+    internal: true
+
+  webapp-dev:
+    desc: "Runs 'npm run dev' in the project2 directory"
+    dir: ./ePrometna_WebApp
+    deps:
+      - webapp-install-dep
+    cmds:
+      - npm run dev
+    signal: SIGINT
+
+  webapp-install-dep:
+    dir: ./ePrometna_WebApp
+    cmd: npm install
+    internal: true
+
+  server-install-dep:
+    dir: ./ePrometna_Server/
+    cmds:
+      - cmd: "go install github.com/air-verse/air@latest"
+      - cmd: "go install github.com/swaggo/swag/cmd/swag@latest"
+    internal: true
+
+  linux:open:
+    platforms: [linux]
+    cmd: xdg-open http://localhost:3000
+    internal: true
+
+  darwin:open:
+    platforms: [darwin]
+    cmd: open http://localhost:3000
+    internal: true
+
+  windows:open:
+    platforms: [windows]
+    cmd: start http://localhost:3000
+    internal: true
