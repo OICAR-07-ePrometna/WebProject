@@ -18,8 +18,8 @@ tasks:
 
   clone-init:
     cmds:
-      - cmd: "git clone https://github.com/OICAR-07-ePrometna/ePrometna_Server"
-      - cmd: "git clone https://github.com/OICAR-07-ePrometna/ePrometna_WebApp"
+      - cmd: "git clone git@github.com:OICAR-07-ePrometna/ePrometna_Server.git"
+      - cmd: "git clone git@github.com:OICAR-07-ePrometna/ePrometna_WebApp.git"
     ignore_error: true
     internal: true
     silent: true
