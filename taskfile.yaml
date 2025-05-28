@@ -77,15 +77,15 @@ tasks:
 
   linux:open:
     platforms: [linux]
-    cmd: xdg-open http://localhost:3000
+    cmd: xdg-open http://localhost:8091
     internal: true
 
   darwin:open:
     platforms: [darwin]
-    cmd: open http://localhost:3000
+    cmd: open http://localhost:8091
     internal: true
 
   windows:open:
     platforms: [windows]
-    cmd: start http://localhost:3000
+    cmd: start http://localhost:8091
     internal: true
