@@ -118,3 +118,24 @@ tasks:
       - cmd: "task dev"
     signal: SIGINT
     internal: true
+
+  build:
+    desc: "Builds docker images for projects"
+    deps:
+      - task: build-server
+      - task: build-webapp
+    parallel: true
+
+  build-server:
+    dir: ./ePrometna_Server
+    cmds:
+      - cmd: "git checkout main"
+      - cmd: "task build-docker"
+    internal: true
+
+  build-webapp:
+    dir: ./ePrometna_WebApp/
+    cmds:
+      - cmd: "git checkout main"
+      - cmd: "task build-docker"
+    internal: true
