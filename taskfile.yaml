@@ -63,6 +63,7 @@ tasks:
     cmds:
       - cmd: "task dev"
     signal: SIGINT
+    internal: true
 
   webapp-install-dep:
     dir: ./ePrometna_WebApp
@@ -92,12 +93,14 @@ tasks:
     internal: true
 
   test-env:
+    desc: "Runs test enviroment"
     deps:
       - server-test
       - webapp-dev
     parallel: true
 
   test:
+    desc: "Runs integration tests"
     dir: ./ePrometna_WebApp
     cmds:
       - cmd: "task test -- --reporter=list"
