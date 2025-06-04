@@ -34,6 +34,7 @@ tasks:
     cmds:
       - cmd: "task dev"
     signal: SIGINT
+    internal: true
 
   linux:server-setup-env:
     cmd:
@@ -60,7 +61,7 @@ tasks:
     deps:
       - webapp-install-dep
     cmds:
-      - npm run dev
+      - cmd: "task dev"
     signal: SIGINT
 
   webapp-install-dep:
@@ -88,4 +89,29 @@ tasks:
   windows:open:
     platforms: [windows]
     cmd: start http://localhost:8091
+    internal: true
+
+  test-env:
+    deps:
+      - server-test
+      - webapp-dev
+    parallel: true
+
+  test:
+    dir: ./ePrometna_WebApp
+    cmds:
+      - cmd: "task test -- --reporter=list"
+
+  server-test:
+    desc: "Runs 'task dev' in the ePrometna_Server directory in test mode"
+    dir: ./ePrometna_Server
+    env:
+      ENV: test
+    deps:
+      - task: "{{OS}}:server-setup-env"
+      - task: server-install-dep
+    parallel: true
+    cmds:
+      - cmd: "task dev"
+    signal: SIGINT
     internal: true
